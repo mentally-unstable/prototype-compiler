@@ -18,12 +18,35 @@ int mathop(int tok) {
         case tDIV:
             return aDIV;
         case tMOD:
-            return aLPAREN;
+            return aMOD;
         case tINT:
-            return aLPAREN;
+            return aINT;
         default:
-            fprintf(stderr, "[PARSER] Unknown token in mathop() on line %d\n", State.line);
+            fprintf(stderr, "[PARSER] Unknown token on line %d\n", State.line);
             exit(1);
+    }
+}
+
+// just a utility for better error messages
+char *which_token(int tkn) {
+    switch (tkn) {
+        case 0:
+        case 1:
+            return "parentheses";
+        case 2:
+            return "`+'";
+        case 3:
+            return "`-'";
+        case 4:
+            return "`*'";
+        case 5:
+            return "`/'";
+        case 6:
+            return "`%'";
+        case 8:
+            return "end of file";
+        default:
+            return "int";
     }
 }
 
@@ -46,7 +69,7 @@ static struct ASTNode *primary(void)
             scan(&State.curtoken);
             return n;
         default:
-            fprintf(stderr, "[PARSER] syntax error on line %d: unexpected token `%d'\n", State.line, State.curtoken.token);
+            fprintf(stderr, "[PARSER] Syntax error on line %d: unexpected %s\n", State.line, which_token(State.curtoken.token));
             exit(1);
     }
 }

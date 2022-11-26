@@ -10,6 +10,7 @@ ASTNode mkastleaf(int op, int intvalue);
 ASTNode mkastunary(int op, ASTNode left, int intvalue);
 
 ASTNode binexpr(void);
+char *which_token(int tkn);
 
 int interpretAST(ASTNode n);
 

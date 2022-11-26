@@ -17,7 +17,7 @@ int interpretAST(struct ASTNode *n) { // can't use typedef because of n->left, r
     if (n->op == aINT)
         printf("int %d\n", n->intvalue);
     else
-        printf("%d %s %d\n", leftval, ASTop[n->op], rightval);
+        printf("%d %s %d\n", leftval, ASTop[n->op-2], rightval); // minus 2 to fix offset in enum caused by parentheses
 
     switch (n->op) {
         case aADD:
@@ -33,7 +33,7 @@ int interpretAST(struct ASTNode *n) { // can't use typedef because of n->left, r
         case aINT:
             return (n->intvalue);
         default:
-            fprintf(stderr, "[PARSER] Unknown operator %d\n", n->op);
+            fprintf(stderr, "[PARSER] Unknown operator on line %d\n", State.line);
             exit(1);
     }
 }
