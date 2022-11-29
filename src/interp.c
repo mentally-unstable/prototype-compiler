@@ -33,7 +33,7 @@ int interpretAST(struct ASTNode *n) { // can't use typedef because of n->left, r
         case aINT:
             return (n->intvalue);
         default:
-            fprintf(stderr, "[PARSER] Unknown operator on line %d\n", State.line);
+            fprintf(stderr, "[%d:%d] Syntax error: unknown operator\n", State.line, State.col);
             exit(1);
     }
 }

@@ -39,6 +39,6 @@ int main(int argc, char **argv) {
     n = binexpr();		// Parse the expression in the file
     printf("equals %d\n", interpretAST(n));	// Calculate the final result
 
-    free(n);
     return 0;
 }
+

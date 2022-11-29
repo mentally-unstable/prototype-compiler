@@ -16,12 +16,17 @@ static int next(void) {
     if (State.putback) {
         c = State.putback;
         State.putback = 0;
+        // State.col++;
         return c;
     }
 
     c = fgetc(State.infile);
-    if (c == '\n')
+    State.col++;
+
+    if (c == '\n') {
         State.line++;
+        State.col = 0;
+    }
 
     return c;
 }
@@ -87,7 +92,7 @@ int scan(struct Token *t) {
                 break;
             }
 
-            printf("Unrecognized character %c on line %d\n", c, State.line);
+            printf("[%d:%d] Unrecognized character %c\n", State.line, State.col, c);
             exit(1);
     }
 

@@ -22,7 +22,7 @@ int mathop(int tok) {
         case tINT:
             return aINT;
         default:
-            fprintf(stderr, "[PARSER] Unknown token on line %d\n", State.line);
+            fprintf(stderr, "[%d:%d] Syntax error: unknown token\n", State.line, State.col);
             exit(1);
     }
 }
@@ -69,7 +69,7 @@ static struct ASTNode *primary(void)
             scan(&State.curtoken);
             return n;
         default:
-            fprintf(stderr, "[PARSER] Syntax error on line %d: unexpected %s\n", State.line, which_token(State.curtoken.token));
+            fprintf(stderr, "[%d:%d] Syntax error: unexpected %s\n", State.line, State.col, which_token(State.curtoken.token));
             exit(1);
     }
 }

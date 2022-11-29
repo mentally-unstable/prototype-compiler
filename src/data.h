@@ -16,6 +16,7 @@
 
 extern_ struct {
     int line;
+    int col;
     int putback;
     FILE *infile;
     struct Token curtoken;
